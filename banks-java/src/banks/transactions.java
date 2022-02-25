@@ -5,45 +5,45 @@ import java.util.UUID;
 public class transactions {
     public transactions(String numberScoreSender, double sum, String numberScoreBeneficiary)
     {
-        Id = UUID.randomUUID().toString();
-        NumberScoreSender = numberScoreSender;
-        NumberScoreBeneficiary = numberScoreBeneficiary;
+        id = UUID.randomUUID().toString();
+        this.numberScoreSender = numberScoreSender;
+        this.numberScoreBeneficiary = numberScoreBeneficiary;
         Sum = sum;
     }
 
     public transactions(String numberScoreSender, double sum)
     {
-        Id = UUID.randomUUID().toString();
-        NumberScoreSender = numberScoreSender;
+        id = UUID.randomUUID().toString();
+        this.numberScoreSender = numberScoreSender;
         Sum = sum;
     }
-    private String Id;
-    private String NumberScoreSender;
-    private String NumberScoreBeneficiary;
+    private String id;
+    private String numberScoreSender;
+    private String numberScoreBeneficiary;
     private double Sum;
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNumberScoreSender() {
-        return NumberScoreSender;
+        return numberScoreSender;
     }
 
     public void setNumberScoreSender(String numberScoreSender) {
-        NumberScoreSender = numberScoreSender;
+        this.numberScoreSender = numberScoreSender;
     }
 
     public String getNumberScoreBeneficiary() {
-        return NumberScoreBeneficiary;
+        return numberScoreBeneficiary;
     }
 
     public void setNumberScoreBeneficiary(String numberScoreBeneficiary) {
-        NumberScoreBeneficiary = numberScoreBeneficiary;
+        this.numberScoreBeneficiary = numberScoreBeneficiary;
     }
 
     public double getSum() {

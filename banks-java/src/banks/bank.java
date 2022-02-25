@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
-import banks.Exception.banksException;
+import banks.exception.banksException;
 import banks.bankAccounts.creditscore;
 import banks.bankAccounts.debitscore;
 import banks.bankAccounts.depositscore;
@@ -16,200 +16,201 @@ import banks.observer.iobserevable;
 public class bank implements iobserevable, iobserver{
     public bank(double percentDebitScore, double percentCreditScore, String name, double limit, double percentDepositScore)
     {
-        Client = new ArrayList<client>();
-        Observers = new ArrayList<iobserver>();
-        PercentDebitScore = percentDebitScore;
-        PercentCreditScore = percentCreditScore;
-        Message = new ArrayList<String>();
-        Name = name;
-        Id = UUID.randomUUID().toString();
-        Accounts = new ArrayList<account>();
-        LimitCreditScore = limit;
-        CurrentDate = LocalDateTime.now();
-        DictionaryDeposit = new ArrayList<dictionaryDeposit>();
-        TransactionsList = new ArrayList<transactions>();
-        PercentDepositScore = percentDepositScore;
+        client = new ArrayList<client>();
+        observers = new ArrayList<iobserver>();
+        this.percentDebitScore = percentDebitScore;
+        this.percentCreditScore = percentCreditScore;
+        message = new ArrayList<String>();
+        this.name = name;
+        id = UUID.randomUUID().toString();
+        accounts = new ArrayList<account>();
+        limitCreditScore = limit;
+        currentDate = LocalDateTime.now();
+        dictionaryDeposits = new ArrayList<dictionaryDeposit>();
+        transactions = new ArrayList<transactions>();
+        this.percentDepositScore = percentDepositScore;
     }
 
-    private List<String> Message;
-    private double PercentDebitScore;
-    private double PercentCreditScore;
-    private double PercentDepositScore;
-    private double LimitCreditScore;
-    private String Name;
-    private String Id;
-    private List<account> Accounts;
-    private LocalDateTime CurrentDate;
-    private List<dictionaryDeposit> DictionaryDeposit;
-    private List<transactions> TransactionsList;
-    private List<client> Client;
+    private List<String> message;
+    private double percentDebitScore;
+    private double percentCreditScore;
+    private double percentDepositScore;
+    private double limitCreditScore;
+    private String name;
+    private String id;
+    private List<account> accounts;
+    private LocalDateTime currentDate;
+    private List<dictionaryDeposit> dictionaryDeposits;
+    private List<transactions> transactions;
+    private List<client> client;
 
     public List<iobserver> getObservers() {
-        return Observers;
+        return observers;
     }
 
     public void setObservers(List<iobserver> observers) {
-        Observers = observers;
+        this.observers = observers;
     }
 
-    private List<iobserver> Observers;
+    private List<iobserver> observers;
 
     public List<client> getClient() {
-        return Client;
-    }
-
-    public void setClient(List<client> client) {
-        Client = client;
-    }
-
-    public List<String> getMessage() {
-        return Message;
-    }
-
-    public void setMessage(List<String> message) {
-        Message = message;
-    }
-
-    public double getPercentDebitScore() {
-        return PercentDebitScore;
-    }
-
-    public void setPercentDebitScore(double percentDebitScore) {
-        PercentDebitScore = percentDebitScore;
-    }
-
-    public double getPercentCreditScore() {
-        return PercentCreditScore;
-    }
-
-    public void setPercentCreditScore(double percentCreditScore) {
-        PercentCreditScore = percentCreditScore;
-    }
-
-    public double getPercentDepositScore() {
-        return PercentDepositScore;
-    }
-
-    public void setPercentDepositScore(double percentDepositScore) {
-        PercentDepositScore = percentDepositScore;
-    }
-
-    public double getLimitCreditScore() {
-        return LimitCreditScore;
-    }
-
-    public void setLimitCreditScore(double limitCreditScore) {
-        LimitCreditScore = limitCreditScore;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public void setId(String id) {
-        Id = id;
-    }
-
-    public List<account> getAccounts() {
-        return Accounts;
-    }
-
-    public void setAccounts(List<account> accounts) {
-        Accounts = accounts;
-    }
-
-    public LocalDateTime getCurrentDate() {
-        return CurrentDate;
-    }
-
-    public void setCurrentDate(LocalDateTime currentDate) {
-        CurrentDate = currentDate;
-    }
-
-    public List<dictionaryDeposit> getDictionaryDeposit() {
-        return DictionaryDeposit;
-    }
-
-    public void setDictionaryDeposit(List<dictionaryDeposit> dictionaryDeposit) {
-        DictionaryDeposit = dictionaryDeposit;
-    }
-
-    public List<transactions> getTransactionsList() {
-        return TransactionsList;
-    }
-
-    public void setTransactionsList(List<transactions> transactionsList) {
-        TransactionsList = transactionsList;
-    }
-    public void ChangePercentCreditScore(double newPercent)
-    {
-        PercentCreditScore = newPercent;
-        String message = "your percent has changed to" + PercentDebitScore;
-        NotifyObservers(message);
-    }
-
-    public void ChangePercentDebitScore(double newPercent)
-    {
-        PercentDebitScore = newPercent;
-        String message = "your percent has changed to" + PercentDebitScore;
-        NotifyObservers(message);
-    }
-
-    public void ChangePercentDepositScore(double newPercent)
-    {
-        PercentDepositScore = newPercent;
-        String message = "your percent has changed to" + PercentDepositScore;
-        NotifyObservers(message);
-    }
-
-    public void AddObserver(iobserver iObserver)
-    {
-        Observers.add(iObserver);
-    }
-
-    public void RemoveObserver(iobserver iObserver)
-    {
-        Observers.remove(iObserver);
-    }
-
-    public void NotifyObservers(String message)
-    {
-        for (iobserver observer : Observers)
-        {
-            observer.Update(message);
-        }
-    }
-
-    public void Update(String str)
-    {
-        Message.add(str);
-    }
-
-    public client CreateClient(client client)
-    {
-        AddObserver(client);
-        Client.add(client);
         return client;
     }
 
-    public account CreateAccount(client client)
+    public void setClient(List<client> client) {
+        this.client = client;
+    }
+
+    public List<String> getMessage() {
+        return message;
+    }
+
+    public void setMessage(List<String> message) {
+        this.message = message;
+    }
+
+    public double getPercentDebitScore() {
+        return percentDebitScore;
+    }
+
+    public void setPercentDebitScore(double percentDebitScore) {
+        this.percentDebitScore = percentDebitScore;
+    }
+
+    public double getPercentCreditScore() {
+        return percentCreditScore;
+    }
+
+    public void setPercentCreditScore(double percentCreditScore) {
+        this.percentCreditScore = percentCreditScore;
+    }
+
+    public double getPercentDepositScore() {
+        return percentDepositScore;
+    }
+
+    public void setPercentDepositScore(double percentDepositScore) {
+        this.percentDepositScore = percentDepositScore;
+    }
+
+    public double getLimitCreditScore() {
+        return limitCreditScore;
+    }
+
+    public void setLimitCreditScore(double limitCreditScore) {
+        this.limitCreditScore = limitCreditScore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public LocalDateTime getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(LocalDateTime currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public List<dictionaryDeposit> getDictionaryDeposits() {
+        return dictionaryDeposits;
+    }
+
+    public void setDictionaryDeposits(List<dictionaryDeposit> dictionaryDeposits) {
+        this.dictionaryDeposits = dictionaryDeposits;
+    }
+
+    public List<transactions> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<transactions> transactions) {
+        this.transactions = transactions;
+    }
+
+    public void changePercentCreditScore(double newPercent)
+    {
+        percentCreditScore = newPercent;
+        String message = "your percent has changed to" + percentDebitScore;
+        notifyObservers(message);
+    }
+
+    public void changePercentDebitScore(double newPercent)
+    {
+        percentDebitScore = newPercent;
+        String message = "your percent has changed to" + percentDebitScore;
+        notifyObservers(message);
+    }
+
+    public void changePercentDepositScore(double newPercent)
+    {
+        percentDepositScore = newPercent;
+        String message = "your percent has changed to" + percentDepositScore;
+        notifyObservers(message);
+    }
+
+    public void addObserver(iobserver iObserver)
+    {
+        observers.add(iObserver);
+    }
+
+    public void removeObserver(iobserver iObserver)
+    {
+        observers.remove(iObserver);
+    }
+
+    public void notifyObservers(String message)
+    {
+        for (iobserver observer : observers)
+        {
+            observer.update(message);
+        }
+    }
+
+    public void update(String str)
+    {
+        message.add(str);
+    }
+
+    public client createClient(client client)
+    {
+        addObserver(client);
+        this.client.add(client);
+        return client;
+    }
+
+    public account createAccount(client client)
     {
         var account = new account(client);
-        Accounts.add(account);
+        accounts.add(account);
         return account;
     }
 
-    public void AddAddress(String passport, String address) throws banksException {
+    public void addAddress(String passport, String address) throws banksException {
 
-        Stream<client> clientStream = Client.stream();
+        Stream<client> clientStream = client.stream();
         clientStream = clientStream.filter(client1 -> client1.getPassport().equals(passport));
         if (address.isBlank())
         {
@@ -218,8 +219,8 @@ public class bank implements iobserevable, iobserver{
         clientStream.forEach(client1 -> client1.setAddress(address));
     }
 
-    public void AddNumberPhone(String passport, String numberPhone) throws banksException {
-        Stream<client> clientStream = Client.stream();
+    public void addNumberPhone(String passport, String numberPhone) throws banksException {
+        Stream<client> clientStream = client.stream();
         clientStream = clientStream.filter(client1 -> client1.getPassport().equals(passport));
         if (numberPhone.isBlank())
         {
@@ -229,15 +230,15 @@ public class bank implements iobserevable, iobserver{
         clientStream.forEach(client1 -> client1.setNumberPhone(numberPhone));
     }
 
-    public creditscore CreateCreditScore(String id, double money) throws banksException {
-        account account = Accounts.stream()
+    public creditscore createCreditScore(String id, double money) throws banksException {
+        account account = accounts.stream()
                 .filter(account1 -> account1.getId().equals(id))
                 .findFirst()
                 .orElse(null);
-        money += LimitCreditScore;
+        money += limitCreditScore;
         if (account != null)
         {
-            var creditScore = new creditscore(money, PercentCreditScore, LimitCreditScore, account.getClient(), LocalDateTime.now());
+            var creditScore = new creditscore(money, percentCreditScore, limitCreditScore, account.getClient(), LocalDateTime.now());
             account.getScores().add(creditScore);
             return creditScore;
         }
@@ -245,15 +246,15 @@ public class bank implements iobserevable, iobserver{
         throw new banksException("failed to create credit score");
     }
 
-    public debitscore CreateDebitScore(String id, double money) throws banksException {
-        account account = Accounts.stream()
+    public debitscore createDebitScore(String id, double money) throws banksException {
+        account account = accounts.stream()
                 .filter(account1 -> account1.getId().equals(id))
                 .findFirst()
                 .orElse(null);
         final double limit = 0;
         if (account != null)
         {
-            var debitScore = new debitscore(money, PercentDebitScore, limit, account.getClient(), LocalDateTime.now());
+            var debitScore = new debitscore(money, percentDebitScore, limit, account.getClient(), LocalDateTime.now());
             account.getScores().add(debitScore);
             return debitScore;
         }
@@ -261,13 +262,13 @@ public class bank implements iobserevable, iobserver{
         throw new banksException("failed to create debit score");
     }
 
-    public depositscore CreateDepositScore(String account, double money) throws banksException {
-        for (account account1 : Accounts)
+    public depositscore createDepositScore(String account, double money) throws banksException {
+        for (account account1 : accounts)
         {
             if (account.equals(account1.getId()))
             {
                 double limit = money;
-                for (var pair : DictionaryDeposit)
+                for (var pair : dictionaryDeposits)
                 {
                     if (pair.getKey() > money)
                     {
@@ -282,29 +283,29 @@ public class bank implements iobserevable, iobserver{
         throw new banksException("failed to create deposit score");
     }
 
-    public void ChargePercent(int days){
-        var scores = Accounts.stream()
+    public void chargePercent(int days){
+        var scores = accounts.stream()
                 .flatMap(account -> account.getScores().stream());
         scores.forEach(score -> {
-            score.ChargePercent(days);
+            score.chargePercent(days);
         });
 
     }
 
-    public void RaiseMoney(String id, double money) {
-        Stream<account> clientStream = Accounts.stream().filter(account1 -> account1.getId().equals(id));
+    public void raiseMoney(String id, double money) {
+        Stream<account> clientStream = accounts.stream().filter(account1 -> account1.getId().equals(id));
         clientStream = clientStream.filter(account1 -> account1.getId().equals(id));
         Stream<bankAccount> bankAccount = clientStream.flatMap(account1 -> account1.getScores().stream());
         bankAccount.forEach(score -> {
 
-            score.RaiseMoney(money);
+            score.raiseMoney(money);
         });
         var transaction = new transactions(id, money);
-        TransactionsList.add(transaction);
+        transactions.add(transaction);
     }
 
-    public void PutMoney(String idAccount, double money, String idBankAccount) throws banksException {
-        account account = Accounts.stream()
+    public void putMoney(String idAccount, double money, String idBankAccount) throws banksException {
+        account account = accounts.stream()
                 .filter(account1 -> account1.getId().equals(idAccount))
                 .findFirst()
                 .orElse(null);
@@ -313,13 +314,13 @@ public class bank implements iobserevable, iobserver{
                 .findFirst()
                 .orElse(null);
         var transaction = new transactions(idBankAccount, money);
-        TransactionsList.add(transaction);
-        score.PutMoney(money);
+        transactions.add(transaction);
+        score.putMoney(money);
     }
 
-    public bankAccount SearchScore(String id)
+    public bankAccount searchScore(String id)
     {
-        for (account account : Accounts)
+        for (account account : accounts)
         {
             for (var score : account.getScores())
             {
@@ -333,10 +334,10 @@ public class bank implements iobserevable, iobserver{
         return null;
     }
 
-    public transactions Transaction(String numberScoreSender, String numberScoreBeneficiary, double sum)
+    public transactions transaction(String numberScoreSender, String numberScoreBeneficiary, double sum)
     {
-        bankAccount score = SearchScore(numberScoreSender);
-        bankAccount score1 = SearchScore(numberScoreBeneficiary);
+        bankAccount score = searchScore(numberScoreSender);
+        bankAccount score1 = searchScore(numberScoreBeneficiary);
         double scoreMoney1 = score.getScoreMoney();
         double scoreMoney2 = score1.getScoreMoney();
         scoreMoney2 += sum;
@@ -344,12 +345,12 @@ public class bank implements iobserevable, iobserver{
         score.setScoreMoney(scoreMoney1);
         score1.setScoreMoney(scoreMoney2);
         var transaction = new transactions(numberScoreSender, sum, numberScoreBeneficiary);
-        TransactionsList.add(transaction);
+        transactions.add(transaction);
         return transaction;
     }
 
-    public void CancelTransaction(String id) throws banksException {
-        for (transactions transaction : TransactionsList)
+    public void cancelTransaction(String id) throws banksException {
+        for (transactions transaction : transactions)
         {
             if (transaction.getNumberScoreBeneficiary().isBlank())
             {
@@ -358,8 +359,8 @@ public class bank implements iobserevable, iobserver{
 
             if (transaction.getId().equals(id))
             {
-                bankAccount score = SearchScore(transaction.getNumberScoreSender());
-                bankAccount score1 = SearchScore(transaction.getNumberScoreBeneficiary());
+                bankAccount score = searchScore(transaction.getNumberScoreSender());
+                bankAccount score1 = searchScore(transaction.getNumberScoreBeneficiary());
                 if (score != null && score1 != null)
                 {
                     double scoreMoney1 = score.getScoreMoney();
@@ -377,14 +378,14 @@ public class bank implements iobserevable, iobserver{
         }
     }
 
-    public void CancelNotify(iobserver observer)
+    public void cancelNotify(iobserver observer)
     {
-        Observers.remove(observer);
+        observers.remove(observer);
     }
 
-    public LocalDateTime AddDays(int days)
+    public LocalDateTime addDays(int days)
     {
-        CurrentDate = CurrentDate.plusDays(days);
-        return CurrentDate;
+        currentDate = currentDate.plusDays(days);
+        return currentDate;
     }
 }

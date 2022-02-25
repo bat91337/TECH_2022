@@ -7,38 +7,38 @@ import java.util.UUID;
 public class account {
     public account(client client)
     {
-        Scores = new ArrayList<bankAccount>();
-        Client = client;
-        Id = UUID.randomUUID().toString();
+        scores = new ArrayList<bankAccount>();
+        this.client = client;
+        id = UUID.randomUUID().toString();
     }
-    private List<bankAccount> Scores;
-    private client Client;
-    private String Id;
+    private List<bankAccount> scores;
+    private client client;
+    private String id;
 
     public List<bankAccount> getScores() {
-        return Scores;
+        return scores;
     }
 
     public void setScores(List<bankAccount> scores) {
-        Scores = scores;
+        this.scores = scores;
     }
 
 
     public client getClient() {
-        return Client;
+        return client;
     }
 
     public void setClient(client client) {
-        Client = client;
+        this.client = client;
     }
 
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
 }

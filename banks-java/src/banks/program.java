@@ -2,7 +2,7 @@ package banks;
 
 import java.util.Scanner;
 import banks.builder.clientBuilder;
-import banks.Exception.banksException;
+import banks.exception.banksException;
 import static java.lang.Double.parseDouble;
 
 public class program {
@@ -16,7 +16,7 @@ public class program {
         _bank = bank;
     }
 
-    public static void CreateClientConsole() {
+    public static void createClientConsole() {
         var clientBuilder = new clientBuilder();
         System.out.println("enter customer name");
         String firstName = in.nextLine();
@@ -29,43 +29,43 @@ public class program {
         System.out.println("enter phone number");
         String numberPhone = in.nextLine();
         clientBuilder
-                .SetName(lastName)
-                .SetFirstNAme(firstName)
-                .SetPassport(passport)
-                .SetAddress(address)
-                .SetNumberPhone(numberPhone);
-        _bank.CreateClient(clientBuilder.Build());
+                .setName(lastName)
+                .setFirstName(firstName)
+                .setPassport(passport)
+                .setAddress(address)
+                .setNumberPhone(numberPhone);
+        _bank.createClient(clientBuilder.build());
     }
 
-    public static void CreateCreditScoreConsole() throws banksException {
+    public static void createCreditScoreConsole() throws banksException {
         System.out.println("enter your account id");
         String account = in.nextLine();
         System.out.println("how much money do you want to throw in?");
         double money = parseDouble(in.nextLine());
-        _bank.CreateCreditScore(account, money);
+        _bank.createCreditScore(account, money);
     }
 
-    public static void PutMoneyConsole() throws banksException {
+    public static void putMoneyConsole() throws banksException {
         System.out.println("enter account number");
         String id = in.nextLine();
         System.out.println("how much money do you want to put in?");
         double money = parseDouble(in.nextLine());
         System.out.println("how much money do you want to withdraw?");
         String idBankAccount = in.nextLine();
-        _bank.PutMoney(id, money, idBankAccount);
+        _bank.putMoney(id, money, idBankAccount);
     }
 
-    public static void RaiseMoneyConsole() throws banksException {
+    public static void raiseMoneyConsole() throws banksException {
         System.out.println("enter account number");
         String id = in.nextLine();
         System.out.println("how much money do you want to withdraw?");
         double money = parseDouble(in.nextLine());
         System.out.println("how much money do you want to withdraw?");
         String idBankAccount = in.nextLine();
-        _bank.RaiseMoney(id, money);
+        _bank.raiseMoney(id, money);
     }
 
-    public static void TransactionConsole() {
+    public static void transactionConsole() {
         System.out.println("enter account number");
         String account = in.nextLine();
         System.out.println("Enter your account number");
@@ -74,52 +74,52 @@ public class program {
         String id1 = in.nextLine();
         System.out.println("enter the amount");
         double sum = parseDouble(in.nextLine());
-        _bank.Transaction(account, id, sum);
+        _bank.transaction(account, id, sum);
     }
 
-    public static void CreateDebitScoreConsole() throws banksException {
+    public static void createDebitScoreConsole() throws banksException {
         System.out.println("enter your account id");
         String account = in.nextLine();
         System.out.println("how much money do you want to throw in?");
         double money = parseDouble(in.nextLine());
-        _bank.CreateDebitScore(account, money);
+        _bank.createDebitScore(account, money);
     }
 
-    public static void CancelTransactionConsole() throws banksException {
+    public static void cancelTransactionConsole() throws banksException {
         System.out.println("enter the id of the transaction");
         String id = in.nextLine();
-        _bank.CancelTransaction(id);
+        _bank.cancelTransaction(id);
     }
 
-    public static void CreateDepositScoreConsole() throws banksException {
+    public static void createDepositScoreConsole() throws banksException {
         System.out.println("enter your account id");
         String account = in.nextLine();
         System.out.println("how much money do you want to throw in?");
         double money = parseDouble(in.nextLine());
-        _bank.CreateDepositScore(account, money);
+        _bank.createDepositScore(account, money);
     }
 
-    public static void AddNumberPhoneConsole() throws banksException {
+    public static void addNumberPhoneConsole() throws banksException {
         System.out.println("enter passport details");
         String passport = in.nextLine();
         System.out.println("enter phone number");
         String numberPhone = in.nextLine();
-        _bank.AddNumberPhone(passport, numberPhone);
+        _bank.addNumberPhone(passport, numberPhone);
     }
 
-    public static void AddAddressConsole() throws banksException {
+    public static void addAddressConsole() throws banksException {
         System.out.println("enter passport details");
         String passport = in.nextLine();
         System.out.println("enter address");
         String address = in.nextLine();
-        _bank.AddAddress(passport, address);
+        _bank.addAddress(passport, address);
     }
 
-    public void CreateCentralBank(String bankName, double percentDebitScore, double percentCreditScore, double percentDepositScore) {
+    public void createCentralBank(String bankName, double percentDebitScore, double percentCreditScore, double percentDepositScore) {
         _centralBank = centralBank.GetInstance(bankName, percentDebitScore, percentCreditScore, percentDepositScore);
     }
 
-    private static void Main() throws banksException {
+    private static void main() throws banksException {
         while (true) {
             System.out.println("1 - register client");
             System.out.println("2 - create a credit account");
@@ -136,34 +136,34 @@ public class program {
             int number = Integer.parseInt(str);
             switch (number) {
                 case 1:
-                    CreateClientConsole();
+                    createClientConsole();
                     continue;
                 case 2:
-                    CreateCreditScoreConsole();
+                    createCreditScoreConsole();
                     continue;
                 case 3:
-                    CreateDebitScoreConsole();
+                    createDebitScoreConsole();
                     continue;
                 case 4:
-                    CreateDepositScoreConsole();
+                    createDepositScoreConsole();
                     continue;
                 case 5:
-                    RaiseMoneyConsole();
+                    raiseMoneyConsole();
                     continue;
                 case 6:
-                    PutMoneyConsole();
+                    putMoneyConsole();
                     continue;
                 case 7:
-                    TransactionConsole();
+                    transactionConsole();
                     continue;
                 case 8:
-                    CancelTransactionConsole();
+                    cancelTransactionConsole();
                     continue;
                 case 9:
-                    AddAddressConsole();
+                    addAddressConsole();
                     continue;
                 case 10:
-                    AddNumberPhoneConsole();
+                    addNumberPhoneConsole();
                     continue;
                 case 11:
                     return;

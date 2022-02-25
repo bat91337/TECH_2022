@@ -1,7 +1,7 @@
 package banks.bankAccounts;
 import banks.bankAccount;
 import banks.client;
-import banks.Exception.banksException;
+import banks.exception.banksException;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ public class debitscore extends bankAccount{
         super(scoreMoney, percent, limit, client, dateTime);
     }
 
-    public @Override void RaiseMoney(double money)throws banksException
+    public @Override void raiseMoney(double money)throws banksException
     {
         if (getScoreMoney() >= money)
         {
@@ -25,14 +25,14 @@ public class debitscore extends bankAccount{
         }
     }
 
-    public @Override void PutMoney(double money)
+    public @Override void putMoney(double money)
     {
         double ScoreMoney1 = getScoreMoney();
         ScoreMoney1 += money;
         setScoreMoney(ScoreMoney1);
     }
 
-    public @Override void ChargePercent(int days)
+    public @Override void chargePercent(int days)
     {
         double ScoreMoney1 = getScoreMoney();
         double Limit1 = getLimit();

@@ -7,79 +7,79 @@ import banks.observer.iobserver;
 public class client implements iobserver {
     public client(String firsNameClient, String lastNameClient, String passport, String address, String numberPhone)
     {
-        FirstNameClient = firsNameClient;
-        LastNameClient = lastNameClient;
-        Address = address;
-        Passport = passport;
-        Message = new ArrayList<String>();
-        NumberPhone = numberPhone;
+        firstNameClient = firsNameClient;
+        this.lastNameClient = lastNameClient;
+        this.address = address;
+        this.passport = passport;
+        message = new ArrayList<String>();
+        this.numberPhone = numberPhone;
     }
     public client(String firsNameClient, String lastNameClient, String passport)
     {
-        FirstNameClient = firsNameClient;
-        LastNameClient = lastNameClient;
-        Passport = passport;
-        Message = new ArrayList<String>();
+        firstNameClient = firsNameClient;
+        this.lastNameClient = lastNameClient;
+        this.passport = passport;
+        message = new ArrayList<String>();
     }
 
-    private String LastNameClient;
-    private String Address;
-    private String Passport;
-    private String FirstNameClient;
-    private List<String> Message;
+    private String lastNameClient;
+    private String address;
+    private String passport;
+    private String firstNameClient;
+    private List<String> message;
 
     public String getLastNameClient() {
-        return LastNameClient;
+        return lastNameClient;
     }
 
     public void setLastNameClient(String lastNameClient) {
-        LastNameClient = lastNameClient;
+        this.lastNameClient = lastNameClient;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public String getPassport() {
-        return Passport;
+        return passport;
     }
 
     public void setPassport(String passport) {
-        Passport = passport;
+        this.passport = passport;
     }
 
     public String getFirstNameClient() {
-        return FirstNameClient;
+        return firstNameClient;
     }
 
     public void setFirstNameClient(String firstNameClient) {
-        FirstNameClient = firstNameClient;
+        this.firstNameClient = firstNameClient;
     }
 
     public List<String> getMessage() {
-        return Message;
+        return message;
     }
 
     public void setMessage(List<String> message) {
-        Message = message;
+        this.message = message;
     }
 
     public String getNumberPhone() {
-        return NumberPhone;
+        return numberPhone;
     }
 
-    private String NumberPhone;
+    private String numberPhone;
 
-    public void Update(String str)
+    public void update(String str)
     {
-        Message.add(str);
+        message.add(str);
     }
     public void setAddress(String address)
     {
-        Address = address;
+        this.address = address;
     }
     public void setNumberPhone(String numberPhone)
     {
-        NumberPhone = numberPhone;
+        this.numberPhone = numberPhone;
     }
 }

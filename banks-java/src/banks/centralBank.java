@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import banks.bankAccounts.creditscore;
-import banks.bankAccounts.depositscore;
 import banks.bankAccounts.debitscore;
 import banks.observer.iobserevable;
 import banks.observer.iobserver;
@@ -13,15 +12,15 @@ public class centralBank implements iobserevable {
 
     private static centralBank _instance;
     private List<bank> _banks;
-    private List<iobserver> Observers;
+    private List<iobserver> observers;
     public centralBank()
     {
         _banks = new ArrayList<bank>();
-        CurrentDate = LocalDateTime.now();
-        Observers = new ArrayList<iobserver>();
+        currentDate = LocalDateTime.now();
+        observers = new ArrayList<iobserver>();
     }
 
-    public LocalDateTime CurrentDate;
+    public LocalDateTime currentDate;
     public static centralBank GetInstance(String name, double percentDebitScore, double percentCreditScore, double percentDepositScore)
     {
         if (_instance == null)
@@ -29,63 +28,63 @@ public class centralBank implements iobserevable {
         return _instance;
     }
 
-    public void AddObserver(iobserver iObserver)
+    public void addObserver(iobserver iObserver)
     {
-        Observers.add(iObserver);
+        observers.add(iObserver);
     }
 
-    public void RemoveObserver(iobserver iObserver)
+    public void removeObserver(iobserver iObserver)
     {
-        Observers.remove(iObserver);
+        observers.remove(iObserver);
     }
 
-    public void NotifyObservers(String message)
+    public void notifyObservers(String message)
     {
-        for (iobserver observer : Observers)
+        for (iobserver observer : observers)
         {
-            observer.Update(message);
+            observer.update(message);
         }
     }
 
-    public bank CreateBank(String name, double percentDebitScore, double percentCreditScore, double limit, double key, double value, double percentDepositScore)
+    public bank createBank(String name, double percentDebitScore, double percentCreditScore, double limit, double key, double value, double percentDepositScore)
     {
         var bank = new bank(percentDebitScore, percentCreditScore, name, limit, percentDepositScore);
         var dictionaryDeposit = new dictionaryDeposit(key, value);
-        bank.getDictionaryDeposit().add(dictionaryDeposit);
+        bank.getDictionaryDeposits().add(dictionaryDeposit);
         _banks.add(bank);
-        AddObserver(bank);
+        addObserver(bank);
         return bank;
     }
 
-    public void ChangePercentDebitScore(double percent, debitscore debitScore)
+    public void changePercentDebitScore(double percent, debitscore debitScore)
     {
         debitScore.setPercent(percent);
         String message = "your percent has changed to" + debitScore.getPercent();
-        NotifyObservers(message);
+        notifyObservers(message);
     }
 
-    public void ChangePercentDepositScore(double key, double value)
+    public void changePercentDepositScore(double key, double value)
     {
         for (bank bank : _banks)
         {
             var dictionaryDeposit = new dictionaryDeposit(key, value);
-            bank.getDictionaryDeposit().add(dictionaryDeposit);
+            bank.getDictionaryDeposits().add(dictionaryDeposit);
         }
 
         String message = "your percent has changed to";
-        NotifyObservers(message);
+        notifyObservers(message);
     }
 
-    public void ChangePercentCreditScore(double percent, creditscore score)
+    public void changePercentCreditScore(double percent, creditscore score)
     {
         score.setPercent(percent);
         String message = "your percent has changed to" + score.getPercent();
-        NotifyObservers(message);
+        notifyObservers(message);
     }
 
-    public LocalDateTime AddDays(int days)
+    public LocalDateTime addDays(int days)
     {
-        CurrentDate = CurrentDate.plusDays(days);
-        return CurrentDate;
+        currentDate = currentDate.plusDays(days);
+        return currentDate;
     }
 }

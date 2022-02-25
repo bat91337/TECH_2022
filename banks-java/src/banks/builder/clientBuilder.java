@@ -7,37 +7,37 @@ public class clientBuilder {
     private String _passport;
     private String _firstNameClient;
     private String _numberPhone;
-    public clientBuilder SetFirstNAme(String firstNAme)
+    public clientBuilder setFirstName(String firstNAme)
     {
         _firstNameClient = firstNAme;
         return this;
     }
 
-    public clientBuilder SetName(String name)
+    public clientBuilder setName(String name)
     {
         _nameClient = name;
         return this;
     }
 
-    public clientBuilder SetAddress(String address)
+    public clientBuilder setAddress(String address)
     {
         _address = address;
         return this;
     }
 
-    public clientBuilder SetPassport(String passport)
+    public clientBuilder setPassport(String passport)
     {
         _passport = passport;
         return this;
     }
 
-    public clientBuilder SetNumberPhone(String numberPhone)
+    public clientBuilder setNumberPhone(String numberPhone)
     {
         _numberPhone = numberPhone;
         return this;
     }
 
-    public client Build()
+    public client build()
     {
         var newClient = new client(_firstNameClient, _nameClient, _passport, _address, _numberPhone);
         return newClient;
