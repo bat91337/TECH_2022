@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 @Table(name = "owners")
 public class Owner {
-
     public Owner(Long id, String name, LocalDateTime date) {
         this.id = id;
         this.name = name;
@@ -57,4 +56,5 @@ public class Owner {
     private LocalDateTime date;
     @OneToMany(mappedBy = "id", cascade=CascadeType.ALL, orphanRemoval=false)
     private List<Kotiki> kotiks;
+
 }

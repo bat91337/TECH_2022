@@ -4,11 +4,11 @@ import Entitites.Owner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class OwnerDAO implements DAO<Owner,Long>  {
+public class OwnerDao implements Dao<Owner, Long> {
 
     private final SessionFactory factory;
 
-    public OwnerDAO(SessionFactory factory) {
+    public OwnerDao(SessionFactory factory) {
         this.factory = factory;
     }
 

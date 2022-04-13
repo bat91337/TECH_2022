@@ -1,18 +1,17 @@
 package Services;
-
 import Entitites.Kotiki;
-import jdbc.KotikiDAO;
+import jdbc.KotikiDao;
 
 public class KotikiService implements Service<Kotiki, Long>{
-    private KotikiDAO kotikDAO;
+    private KotikiDao kotikDAO;
 
-    public KotikiService(KotikiDAO kotikDAO) {
+    public KotikiService(KotikiDao kotikDAO) {
         this.kotikDAO = kotikDAO;
     }
 
     @Override
     public void create(Kotiki kotiki) {
-    kotikDAO.create(kotiki);
+        kotikDAO.create(kotiki);
     }
 
     @Override
@@ -28,6 +27,6 @@ public class KotikiService implements Service<Kotiki, Long>{
 
     @Override
     public void delete(Kotiki kotiki) {
-            kotikDAO.delete(kotiki);
+        kotikDAO.delete(kotiki);
     }
 }

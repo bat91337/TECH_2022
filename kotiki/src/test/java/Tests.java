@@ -6,19 +6,17 @@ import Entitites.Owner;
 import jdbc.*;
 import org.junit.*;
 import org.mockito.Mockito;
-
 import java.time.LocalDateTime;
-
 public class Tests {
-    private KotikiDAO kotikiDAO;
+    private KotikiDao kotikiDAO;
     private KotikiService kotikiService;
-    private OwnerDAO ownerDAO;
+    private OwnerDao ownerDAO;
     private OwnerService ownerService;
     @Before
     public void before() {
-        kotikiDAO = Mockito.mock(KotikiDAO.class);
+        kotikiDAO = Mockito.mock(KotikiDao.class);
         kotikiService = new KotikiService(kotikiDAO);
-        ownerDAO = Mockito.mock(OwnerDAO.class);
+        ownerDAO = Mockito.mock(OwnerDao.class);
         ownerService = new OwnerService(ownerDAO);
     }
     @Test
@@ -55,7 +53,6 @@ public class Tests {
         Owner owner = new Owner(key, "vasya", date);
         return new Kotiki(key, "vasya", date, "l", owner, Colors.RED);
     }
-
 
 
 }

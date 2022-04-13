@@ -1,15 +1,18 @@
 package jdbc;
-
 import Entitites.Kotiki;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class KotikiDAO implements DAO<Kotiki,Long> {
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+public class KotikiDao implements Dao<Kotiki, Long>{
 
     private final SessionFactory factory;
 
-    public KotikiDAO(SessionFactory factory) {
+    public KotikiDao(SessionFactory factory) {
         this.factory = factory;
     }
 

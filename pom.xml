@@ -6,7 +6,11 @@
 
     <groupId>Kotitki</groupId>
     <artifactId>bat91337</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>kotiki</module>
+    </modules>
 
     <dependencies>
         <dependency>
