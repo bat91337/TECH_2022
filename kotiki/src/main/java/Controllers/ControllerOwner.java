@@ -1,6 +1,5 @@
 package Controllers;
 
-import Entitites.Kotiki;
 import Entitites.Owner;
 
 import java.time.LocalDateTime;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ControllerOwner implements Conroller{
+public class ControllerOwner implements Controller{
     private static Scanner in;
     private List<Owner> owners;
     public ControllerOwner() {
@@ -24,7 +23,6 @@ public class ControllerOwner implements Conroller{
         LocalDateTime date = LocalDateTime.parse(in.nextLine());
         Owner owner = new Owner(key, name, date);
     }
-
     @Override
     public Object read() {;
         System.out.println("write your id");

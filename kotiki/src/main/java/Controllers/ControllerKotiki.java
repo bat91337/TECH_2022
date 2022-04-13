@@ -8,10 +8,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
-
-public class ControllerKotiki implements Conroller<Kotiki, Long> {
+public class ControllerKotiki implements Controller<Kotiki, Long> {
     private static Scanner in;
     private List<Owner> owners;
     public ControllerKotiki() {

@@ -1,6 +1,6 @@
-package jdbc;
+package Services;
 
-public interface DAO<Entity, Key> {
+public interface Service <Entity, Key>{
     void create(Entity entity);
     Entity read(Key key);
     void update(Entity entity);

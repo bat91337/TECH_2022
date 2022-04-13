@@ -1,12 +1,12 @@
 package Services;
 
 import Entitites.Owner;
-import jdbc.OwnerDAO;
+import jdbc.OwnerDao;
 
-public class OwnerService implements Service<Owner, Long>{
-    private OwnerDAO ownerDAO;
+public class OwnerService implements Service<Owner,Long>{
+    private OwnerDao ownerDAO;
 
-    public OwnerService(OwnerDAO ownerDAO) {
+    public OwnerService(OwnerDao ownerDAO) {
         this.ownerDAO = ownerDAO;
     }
 
