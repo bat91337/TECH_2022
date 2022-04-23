@@ -41,7 +41,7 @@ public class Tests {
     public void readById() {
         Long key = Long.valueOf(1);
         Mockito.when(kotikiDAO.read(key)).thenReturn(getKotikiTest());
-        var result = kotikiServicel.read(key);
+        Kotiki result = kotikiServicel.read(key);
         Assert.assertEquals(getKotikiTest().getId(), result.getId());
         Mockito.verify(kotikiDAO).read(key);
 
@@ -63,17 +63,17 @@ public class Tests {
         Assert.assertEquals(getKotikiTest().getId(), kotiki.getId());
         Assert.assertEquals(owner1.getKotiks().size(), 1);
     }
-    @Test
-    public void createKotik1()
-    {
-//        Long key = Long.valueOf(1);
-//        String date = "2022-09-09";
-//        Owner owner = new Owner(key, "vasya", date);
-//        Kotiki kotik = new Kotiki(key, "vasya", date, "l", owner, Colors.RED);
-//        Kotiki kotiki = kotikiService.create(kotik);
-//        Mockito.doReturn(kotik).when(kotikiRepository).save(kotik);
-//        Mockito.verify(kotikiRepository, Mockito.times(1)).save(kotik);
-    }
+//    @Test
+//    public void createKotik1()
+//    {
+////        Long key = Long.valueOf(1);
+////        String date = "2022-09-09";
+////        Owner owner = new Owner(key, "vasya", date);
+////        Kotiki kotik = new Kotiki(key, "vasya", date, "l", owner, Colors.RED);
+////        Kotiki kotiki = kotikiService.create(kotik);
+////        Mockito.doReturn(kotik).when(kotikiRepository).save(kotik);
+////        Mockito.verify(kotikiRepository, Mockito.times(1)).save(kotik);
+//    }
 
     private Kotiki getKotikiTest() {
         Long key = Long.valueOf(1);
