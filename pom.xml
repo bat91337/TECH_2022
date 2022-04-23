@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>kotiki</module>
+        <module>Kotiki-2</module>
     </modules>
 
     <dependencies>
