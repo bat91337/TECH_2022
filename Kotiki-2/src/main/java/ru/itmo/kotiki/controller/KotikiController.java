@@ -24,7 +24,7 @@ public class KotikiController {
         return ResponseEntity.ok().body(kotikiService.create(kotik));
     }
     @GetMapping("/SearchById")
-    public ResponseEntity<Kotiki> SearchByID(Long id)
+    public ResponseEntity<Kotiki> SearchByID(@RequestParam(value = "id") Long id)
     {
         return new ResponseEntity<>(kotikiService.readById(id), HttpStatus.OK);
 //        return ResponseEntity.ok().body(kotikiService.readById(id));

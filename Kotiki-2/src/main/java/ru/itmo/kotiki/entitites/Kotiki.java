@@ -24,7 +24,7 @@ public class Kotiki {
     @Enumerated(EnumType.STRING)
     private Colors color;
     @ManyToMany
-    @JoinTable(name = "friendship",
+    @JoinTable(name = "friend_ship",
             joinColumns = @JoinColumn(name = "idfirstkotik"),
             inverseJoinColumns = @JoinColumn(name = "idsecondkotik"))
     private Set<Kotiki> kotiks;
