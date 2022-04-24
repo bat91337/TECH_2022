@@ -3,7 +3,7 @@ package ru.itmo.kotiki.entitites;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "friendShip")
+@Table(name = "friend_Ship")
 public class Friendship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

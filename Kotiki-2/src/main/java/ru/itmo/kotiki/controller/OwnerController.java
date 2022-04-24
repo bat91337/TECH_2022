@@ -3,7 +3,6 @@ package ru.itmo.kotiki.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.itmo.kotiki.entitites.Kotiki;
 import ru.itmo.kotiki.entitites.Owner;
 import ru.itmo.kotiki.service.OwnerService;
 
@@ -30,12 +29,12 @@ public class OwnerController {
         return ResponseEntity.ok().body(ownerService.update(owner));
     }
     @PostMapping("/delete")
-    public ResponseEntity<Owner>Delete(@RequestBody Owner owner) {
-        ownerService.delete(owner);
+    public ResponseEntity<Owner>Delete(@RequestParam(value = "id")Long id) {
+        ownerService.delete(id);
         return ResponseEntity.ok().build();
     }
     @PostMapping("/addKotiki")
-    public ResponseEntity<Owner>AddKotiki(Long owner, Long kotik)
+    public ResponseEntity<Owner>AddKotiki(@RequestParam(value = "idowner") Long owner, @RequestParam(value = "idkotik")Long kotik)
     {
         return ResponseEntity.ok().body(ownerService.addKotik(owner, kotik));
     }
