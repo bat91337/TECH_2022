@@ -1,0 +1,5 @@
+.idea/
+target/
+!pom.xml
+.DS_Store
+.gitignore
