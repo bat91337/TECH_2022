@@ -3,6 +3,7 @@ package ru.itmo.kotik2.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itmo.kotik2.dto.KotikDto;
 import ru.itmo.kotik2.entitites.Colors;
 import ru.itmo.kotik2.entitites.Kotiki;
 import ru.itmo.kotik2.entitites.Owner;
@@ -24,11 +25,8 @@ public class KotikiServiceImpl implements KotikiService {
         this.modelMapper = modelMapper;
     }
 
-
-    // TODO: 30.04.2022 Use Dtos instead of Entities in method parameters
     @Override
     public Kotiki create(Kotiki kotik) {
-//        TODO: Kotiki kotiki = modelMapper.map(kotikiDto, Kotiki.class);
 
         return repositoryKotiki.save(kotik);
     }
@@ -38,8 +36,10 @@ public class KotikiServiceImpl implements KotikiService {
     }
 
     @Override
-    public Kotiki readById(Long key) {
-        return repositoryKotiki.findById(key).get();
+    public KotikDto readById(Long key) {
+        Kotiki kotik = repositoryKotiki.findById(key).get();
+        KotikDto kotikDto = modelMapper.map(kotik, KotikDto.class);
+        return kotikDto;
     }
 
     @Override
@@ -49,7 +49,8 @@ public class KotikiServiceImpl implements KotikiService {
 
     @Override
     public void delete(Long key) {
-        Kotiki kotiki = readById(key);
+        KotikDto kotikiDto = readById(key);
+        Kotiki kotiki = modelMapper.map(kotikiDto, Kotiki.class);
         repositoryKotiki.delete(kotiki);
     }
 

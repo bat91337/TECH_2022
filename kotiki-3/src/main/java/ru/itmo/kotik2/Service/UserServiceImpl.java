@@ -17,11 +17,9 @@ import java.util.Collection;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final OwnerRepository ownerRepository;
 
-    public UserServiceImpl(UserRepository userRepository, OwnerRepository ownerRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.ownerRepository = ownerRepository;
     }
 
 

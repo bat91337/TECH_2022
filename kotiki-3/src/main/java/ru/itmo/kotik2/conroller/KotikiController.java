@@ -1,5 +1,6 @@
 package ru.itmo.kotik2.conroller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,32 +8,35 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import ru.itmo.kotik2.dto.KotikDto;
 import ru.itmo.kotik2.service.KotikiService;
 import ru.itmo.kotik2.service.OwnerService;
 import ru.itmo.kotik2.entitites.Colors;
 import ru.itmo.kotik2.entitites.Kotiki;
 import ru.itmo.kotik2.entitites.Owner;
-import ru.itmo.kotik2.wrappers.KotikiWrapper;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/admin/kotiki")
+@RequestMapping("/kotiki")
 public class KotikiController {
     @Autowired
     private KotikiService kotikiService;
     @Autowired
     private OwnerService ownerService;
-    // TODO: 30.04.2022 Make Autowried by Constructor
+    @Autowired
+    private ModelMapper mapper;
 
     @PostMapping("/create")
     public ResponseEntity<Kotiki> SaveKotiki(@RequestBody Kotiki kotik) {
         return ResponseEntity.ok().body(kotikiService.create(kotik));
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/SearchById")
-    public ResponseEntity<Kotiki> SearchByID(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<KotikDto> SearchByID(@RequestParam(value = "id") Long id) {
         return new ResponseEntity<>(kotikiService.readById(id), HttpStatus.OK);
 //        return ResponseEntity.ok().body(kotikiService.readById(id));
     }
@@ -42,11 +46,7 @@ public class KotikiController {
         return ResponseEntity.ok().body(kotikiService.update(kotik));
     }
 
-//    @GetMapping("/getAll")
-//    public ResponseEntity<Collection<Kotiki>> GetAll() {
-//        return new ResponseEntity<>(kotikiService.GetAllAdmin(), HttpStatus.OK);
-//    }
-
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/delete")
     public ResponseEntity<Kotiki> DeleteKotiki(@RequestParam(value = "id") Long id) {
         kotikiService.delete(id);
@@ -68,25 +68,37 @@ public class KotikiController {
         return ResponseEntity.ok().body(kotikiService.GetKotikByBreed(breed));
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/getByOwner")
-    public ResponseEntity<Collection<Kotiki>> GetByOwner(@RequestParam (value = "owner") Owner owner) {
-        return ResponseEntity.ok().body(kotikiService.GetKotikByOwner(owner));
+    public ResponseEntity<Collection<KotikDto>> GetByOwner(@RequestParam (value = "owner") Owner owner) {
+        return new ResponseEntity<>(kotikiService.GetKotikByOwner(owner).stream()
+                .map(this::toDto)
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @GetMapping("/getAllByOwner")
-    public ResponseEntity<Collection<Kotiki>> GetAllByOwner() {
+    public ResponseEntity<Collection<KotikDto>> GetAllByOwner() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Owner owner1 = ownerService.getOwnerByUsername(authentication.getName());
-        return ResponseEntity.ok().body(kotikiService.GetKotikByOwner(owner1));
+        return new ResponseEntity<>(kotikiService.GetKotikByOwner(owner1).stream()
+                .map(this::toDto)
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Admin')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/getAll")
-    public ResponseEntity<Collection<KotikiWrapper>> GetAll2() {
+    public ResponseEntity<Collection<KotikDto>> GetAll2() {
         return new ResponseEntity<>(
                 kotikiService.GetAllAdmin().stream().
-                        map((kotiki -> kotiki.kotikiWrapper())).
+                        map(this::toDto).
                         collect(Collectors.toList()), HttpStatus.OK);
+    }
 
+    public Kotiki toEntity(KotikDto dto) {
+        return Objects.isNull(dto) ? null : mapper.map(dto, Kotiki.class);
+    }
+
+    public KotikDto toDto(Kotiki entity) {
+        return Objects.isNull(entity) ? null : mapper.map(entity, KotikDto.class);
     }
 }

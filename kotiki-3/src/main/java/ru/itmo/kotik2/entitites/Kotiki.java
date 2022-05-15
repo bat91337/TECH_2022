@@ -1,11 +1,8 @@
 package ru.itmo.kotik2.entitites;
 
-import ru.itmo.kotik2.wrappers.KotikiWrapper;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "kotiki")
@@ -100,10 +97,5 @@ public class Kotiki {
 
     public void setKotiks(Set<Kotiki> kotiks) {
         this.kotiks = kotiks;
-    }
-
-    public KotikiWrapper kotikiWrapper() {
-        return new KotikiWrapper(id, name, date, breed, owner.toString(), color.toString(), kotiks.stream()
-                        .map(kotik -> kotik.getId()).collect(Collectors.toList()));
     }
 }

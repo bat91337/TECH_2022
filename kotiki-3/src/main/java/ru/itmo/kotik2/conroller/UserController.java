@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.kotik2.service.UserService;
 import ru.itmo.kotik2.entitites.Users;
@@ -19,7 +21,9 @@ public class UserController {
     private UserService userService;
     @GetMapping("/")
     public String Hello() {
-        return "hello";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Users user = userService.getUsersByUsername(authentication.getName());
+        return "hello " + user.getName();
     }
     @PostMapping("/create")
     public ResponseEntity<Users> create(@RequestBody Users user) {
