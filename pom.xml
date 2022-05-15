@@ -10,6 +10,8 @@
     <version>1.0</version>
     <modules>
         <module>Kotiki-2</module>
+        <module>kotiki</module>
+        <module>Kotiki-3</module>
     </modules>
 
     <dependencies>
@@ -84,6 +86,11 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.1.0</version>
+        </dependency>
 
     </dependencies>
 
@@ -91,5 +98,5 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-    
+
 </project>
